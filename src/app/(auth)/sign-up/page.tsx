@@ -58,7 +58,7 @@ async function signUp(_: any, formData: FormData): Promise<ActionResult> {
     typeof username !== "string" ||
     username.length < 3 ||
     username.length > 31 ||
-    !/^[a-zA-Z0-9_-]+$/.test(username)
+    !/^[a-zA-Z0-9\._-]+$/.test(username)
   ) {
     return {
       error: "Invalid username",

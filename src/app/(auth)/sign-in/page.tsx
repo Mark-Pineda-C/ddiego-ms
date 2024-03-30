@@ -10,18 +10,23 @@ import { sql } from "drizzle-orm";
 
 export default async function Page() {
   return (
-    <main>
-      <h1>Sign in</h1>
-      <Form action={signIn}>
-        <label htmlFor="username">Username</label>
-        <input name="username" id="username" />
-        <br />
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" />
-        <br />
-        <button>Continue</button>
-      </Form>
-      <Link href="/sign-up">Create an account</Link>
+    <main className="min-h-screen relative w-full grid place-items-center">
+      <div className="top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary-500 to-yellow-900 absolute -z-10" />
+      <div className="container flex flex-col items-center">
+        <h1>Sign in</h1>
+        <div className="bg-white rounded-xl w-full p-6 shadow-xl">
+          <Form action={signIn}>
+            <label htmlFor="username">Username</label>
+            <input name="username" id="username" />
+            <br />
+            <label htmlFor="password">Password</label>
+            <input type="password" name="password" id="password" />
+            <br />
+            <button>Continue</button>
+          </Form>
+        </div>
+        <Link href="/sign-up">Create an account</Link>
+      </div>
     </main>
   );
 }
@@ -33,7 +38,7 @@ async function signIn(_: any, formData: FormData): Promise<ActionResult> {
     typeof username !== "string" ||
     username.length < 3 ||
     username.length > 31 ||
-    !/^[a-zA-Z0-9_-]+$/.test(username)
+    !/^[a-zA-Z0-9\._-]+$/.test(username)
   ) {
     return {
       error: "Invalid username",

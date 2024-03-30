@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@lucia-auth/adapter-drizzle": "^1.0.7",
+    "@uploadthing/react": "^6.4.1",
     "@vercel/postgres": "^0.7.2",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.6",
@@ -17,7 +18,8 @@
     "next": "14.1.4",
     "oslo": "^1.2.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uploadthing": "^6.7.0"
   },
   "devDependencies": {
     "@types/node": "^20",
