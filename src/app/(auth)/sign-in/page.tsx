@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 import { lucia } from "@/lib/auth";
-import { Form } from "@/lib/form";
-import { ActionResult } from "next/dist/server/app-render/types";
+import { ActionResult, Form } from "@/lib/form";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
