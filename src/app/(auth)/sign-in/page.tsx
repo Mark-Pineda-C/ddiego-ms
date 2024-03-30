@@ -8,24 +8,60 @@ import { Argon2id } from "oslo/password";
 import { db, users } from "@/lib/db";
 import { sql } from "drizzle-orm";
 
+import Image from "next/image";
+import Logo from "@/assets/logo_icon.png";
+
 export default async function Page() {
   return (
     <main className="min-h-screen relative w-full grid place-items-center">
       <div className="top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary-500 to-yellow-900 absolute -z-10" />
-      <div className="container flex flex-col items-center">
-        <h1>Sign in</h1>
+      <div className="container flex flex-col items-center gap-10">
+        <Image
+          src={Logo}
+          alt="logo"
+          width={120}
+          height={120}
+          className="lg:hidden"
+        />
+
         <div className="bg-white rounded-xl w-full p-6 shadow-xl">
           <Form action={signIn}>
-            <label htmlFor="username">Username</label>
-            <input name="username" id="username" />
-            <br />
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" />
-            <br />
-            <button>Continue</button>
+            <div className="flex flex-col gap-3 items-center">
+              <div className="space-y-1">
+                <h1 className="font-bold text-lg">Inicio de sesión</h1>
+                <p className="text-sm">
+                  Ingresa tus credenciales para acceder a la plataforma interna
+                  del sistema
+                </p>
+              </div>
+              <div className="flex flex-col gap-1 w-full">
+                <label htmlFor="username" className="font-bold text-sm">
+                  Usuario
+                </label>
+                <input
+                  name="username"
+                  id="username"
+                  className="border rounded-xl bg-neutral-300 p-2 outline-primary-500"
+                />
+              </div>
+              <div className="flex flex-col gap-1 w-full">
+                <label htmlFor="password" className="font-bold text-sm">
+                  Contraseña
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="border rounded-xl bg-neutral-300 p-2 outline-primary-500"
+                />
+              </div>
+              <button className="py-1 px-6 bg-gradient-to-r from-primary-500 to-primary-400 text-white rounded-xl font-medium uppercase tracking-widest">
+                continuar
+              </button>
+              <p className="text-center">Olvidaste tu contraseña?</p>
+            </div>
           </Form>
         </div>
-        <Link href="/sign-up">Create an account</Link>
       </div>
     </main>
   );
