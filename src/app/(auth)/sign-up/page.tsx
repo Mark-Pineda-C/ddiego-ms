@@ -1,10 +1,11 @@
 import { ActionResult, Form } from "@/lib/form";
 import { Argon2id } from "oslo/password";
 import { generateId } from "lucia";
-import { db, userTable } from "@/lib/db";
+import { db, users } from "@/lib/db";
 import { lucia, validateRequest } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function Page() {
   const { user } = await validateRequest();
@@ -43,6 +44,9 @@ export default async function Page() {
         <br />
         <button>Continue</button>
       </Form>
+      <p>
+        Si ya tienes cuenta, <Link href="/sign-in">inicia session</Link>
+      </p>
     </section>
   );
 }
@@ -81,7 +85,9 @@ async function signUp(_: any, formData: FormData): Promise<ActionResult> {
   const userId = generateId(15);
 
   try {
-    db.insert(userTable).values({ id: userId, name, username, hashedPassword });
+    await db
+      .insert(users)
+      .values({ id: userId, name, username, hashedPassword });
 
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
@@ -91,7 +97,11 @@ async function signUp(_: any, formData: FormData): Promise<ActionResult> {
       sessionCookie.attributes
     );
   } catch (e) {
-    console.log(e);
+    if (e.constraint === "dd_user_username_unique") {
+      return {
+        error: "Username already taken",
+      };
+    }
     return {
       error: "Unknown error",
     };

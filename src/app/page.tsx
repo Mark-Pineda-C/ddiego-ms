@@ -1,4 +1,6 @@
-import { validateRequest } from "@/lib/auth";
+import { lucia, validateRequest } from "@/lib/auth";
+import { ActionResult, Form } from "@/lib/form";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -14,11 +16,16 @@ export default async function Home() {
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.tsx</code>
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+        <div className="fixed bottom-0 left-0 flex h-48 w-full flex-col gap-4 items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           {!user ? (
             <Link href="/sign-up">Registrate</Link>
           ) : (
             <p>Bienvenido, {user.name}</p>
+          )}
+          {user && (
+            <Form action={logout}>
+              <button>Salir</button>
+            </Form>
           )}
         </div>
       </div>
@@ -105,5 +112,25 @@ export default async function Home() {
       </div>
     </main>
   );
+}
+
+async function logout(): Promise<ActionResult> {
+  "use server";
+  const { session } = await validateRequest();
+  if (!session) {
+    return {
+      error: "Unauthorized",
+    };
+  }
+
+  await lucia.invalidateSession(session.id);
+
+  const sessionCookie = lucia.createBlankSessionCookie();
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes
+  );
+  return redirect("/sign-in");
 }
 
