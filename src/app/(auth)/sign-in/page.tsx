@@ -10,24 +10,67 @@ import { sql } from "drizzle-orm";
 
 import Image from "next/image";
 import Logo from "@/assets/logo_icon.png";
+import { LogoAlt } from "@/components/svg";
 
 export default async function Page() {
   return (
-    <main className="min-h-screen relative w-full grid place-items-center">
-      <div className="top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary-500 to-yellow-900 absolute -z-10" />
+    <main className="min-h-screen relative w-full grid place-items-center dark:text-neutral-200">
+      <div className="top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary to-secondary absolute -z-10 lg:bg-gradient-to-br" />
       <div className="container flex flex-col items-center gap-10">
         <Image
           src={Logo}
           alt="logo"
           width={120}
           height={120}
-          className="lg:hidden"
+          className="lg:hidden dark:invert"
         />
 
-        <div className="bg-white rounded-xl w-full p-6 shadow-xl">
+        <div className="bg-white/50 rounded-xl w-full p-6 shadow-xl dark:bg-neutral-900/50 relative overflow-hidden border border-white/25 dark:border-neutral-900/25">
+          <div className="absolute top-0 left-0 w-full h-full z-0 backdrop-blur-lg"></div>
           <Form action={signIn}>
-            <div className="flex flex-col gap-3 items-center">
-              <div className="space-y-1">
+            <div className="grid grid-cols-1 gap-2 lg:grid-cols-2 relative z-10">
+              <div className="flex flex-col gap-1 lg:gap-2 items-start">
+                <LogoAlt className="text-3xl text-primary max-lg:hidden" />
+                <h1 className="font-bold text-lg">Inicio de sesión</h1>
+                <p className="text-sm">
+                  Ingresa tus credenciales para acceder a la plataforma interna
+                  del sistema
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 items-center lg:items-start">
+                <div className="flex flex-col gap-1 w-full">
+                  <label htmlFor="username" className="font-bold text-sm">
+                    Usuario
+                  </label>
+                  <input
+                    name="username"
+                    id="username"
+                    aria-autocomplete="none"
+                    autoComplete="none"
+                    autoCapitalize="none"
+                    className="focus-visible:ring-0 rounded-xl bg-neutral-500/25 dark:bg-neutral-300/25 p-2 outline-primary border-none"
+                  />
+                </div>
+                <div className="flex flex-col gap-1 w-full">
+                  <label htmlFor="password" className="font-bold text-sm">
+                    Contraseña
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="focus-visible:ring-0 rounded-xl bg-neutral-500/25 dark:bg-neutral-300/25 p-2 outline-primary border-none"
+                  />
+                </div>
+                <button className="py-1 px-6 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-medium uppercase tracking-widest dark:text-black">
+                  ingresar
+                </button>
+                <p className="text-center">Olvidaste tu contraseña?</p>
+              </div>
+            </div>
+            {/* <div className="flex flex-col gap-3 items-center">
+              <LogoAlt className="text-3xl text-primary-500 hidden" />
+              <div className="space-y-1 w-full">
                 <h1 className="font-bold text-lg">Inicio de sesión</h1>
                 <p className="text-sm">
                   Ingresa tus credenciales para acceder a la plataforma interna
@@ -41,7 +84,7 @@ export default async function Page() {
                 <input
                   name="username"
                   id="username"
-                  className="border rounded-xl bg-neutral-300 p-2 outline-primary-500"
+                  className="focus-visible:ring-0 rounded-xl bg-neutral-500/25 p-2 outline-primary-500"
                 />
               </div>
               <div className="flex flex-col gap-1 w-full">
@@ -52,14 +95,14 @@ export default async function Page() {
                   type="password"
                   name="password"
                   id="password"
-                  className="border rounded-xl bg-neutral-300 p-2 outline-primary-500"
+                  className="focus-visible:ring-0 rounded-xl bg-neutral-500/25 p-2 outline-primary-500"
                 />
               </div>
-              <button className="py-1 px-6 bg-gradient-to-r from-primary-500 to-primary-400 text-white rounded-xl font-medium uppercase tracking-widest">
-                continuar
+              <button className="py-1 px-6 bg-gradient-to-r from-primary-700 to-primary-500 text-white rounded-xl font-medium uppercase tracking-widest">
+                ingresar
               </button>
               <p className="text-center">Olvidaste tu contraseña?</p>
-            </div>
+            </div> */}
           </Form>
         </div>
       </div>
