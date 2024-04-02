@@ -39,4 +39,6 @@ export default function StatusBarColorChanger({
       media.removeEventListener("change", handler);
     };
   }, [color.dark, color.light]);
+
+  return <></>;
 }
