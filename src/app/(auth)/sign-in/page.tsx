@@ -11,8 +11,11 @@ import { sql } from "drizzle-orm";
 import Image from "next/image";
 import Logo from "@/assets/logo_icon.png";
 import { LogoAlt } from "@/components/svg";
+import StatusBarColorChanger from "@/components/status-bar-color-changer";
 
 export default async function Page() {
+  StatusBarColorChanger({ color: { light: "#ffffff", dark: "#000000" } });
+
   return (
     <main className="min-h-screen relative w-full grid place-items-center dark:text-neutral-200">
       <div className="top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary to-secondary absolute -z-10 lg:bg-gradient-to-br" />
