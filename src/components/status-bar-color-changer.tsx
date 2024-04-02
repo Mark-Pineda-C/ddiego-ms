@@ -13,7 +13,16 @@ export default function StatusBarColorChanger({
     const metaTag = (document.querySelector("meta[name='theme-color']") ??
       document.createElement("meta")) as HTMLMetaElement;
 
+    if (metaTag.attributes.length === 0) {
+      metaTag.name = "theme-color";
+      metaTag.content = media.matches ? color.light : color.dark;
+      document.head.appendChild(metaTag);
+    } else {
+      metaTag.content = media.matches ? color.light : color.dark;
+    }
+
     const handler = (e: MediaQueryListEvent) => {
+      console.log(e);
       if (e.matches) {
         if (metaTag.attributes.length === 0) {
           metaTag.name = "theme-color";

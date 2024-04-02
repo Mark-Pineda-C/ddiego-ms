@@ -16,7 +16,7 @@ import StatusBarColorChanger from "@/components/status-bar-color-changer";
 export default async function Page() {
   return (
     <>
-      <StatusBarColorChanger color={{ light: "red", dark: "blue" }} />
+      <StatusBarColorChanger color={{ light: "#471f00", dark: "#fffcf3" }} />
       <main className="min-h-screen relative w-full grid place-items-center dark:text-neutral-200">
         <div className="top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary to-secondary absolute -z-10 lg:bg-gradient-to-br" />
         <div className="container flex flex-col items-center gap-10">
