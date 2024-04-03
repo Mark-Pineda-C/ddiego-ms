@@ -169,5 +169,5 @@ async function signIn(_: any, formData: FormData): Promise<ActionResult> {
     sessionCookie.value,
     sessionCookie.attributes
   );
-  return redirect("/");
+  return redirect("/dashboard");
 }

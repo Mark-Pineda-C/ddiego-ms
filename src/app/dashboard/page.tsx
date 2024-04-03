@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
@@ -11,6 +12,7 @@ export default async function Page() {
       <p>Welcome {user.name}</p>
       <p>Oficina {user.office ?? "<sin oficina>"}</p>
       <p>Rol {user.role}</p>
+      <ThemeSwitcher />
     </div>
   );
 }

@@ -1,5 +1,7 @@
+import Header from "@/components/header";
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { Providers } from "../providers";
 
 export default async function DashboardLayout({
   children,
@@ -9,9 +11,9 @@ export default async function DashboardLayout({
   const { user } = await validateRequest();
   if (!user) redirect("/sign-in");
   return (
-    <>
-      <div className="w-full px-3 py-2 shadow-xl">DASHBOARD</div>
+    <Providers>
+      <Header {...user} />
       {children}
-    </>
+    </Providers>
   );
 }
