@@ -23,7 +23,7 @@ export default function manifest(): MetadataRoute.Manifest {
     dir: "auto",
     lang: "es-PE",
     name: "D'diego MS",
-    start_url: "/",
+    start_url: "/sign-in",
     scope: "/",
     description: "PoC de una aplicacion PWA para la empresa D'Diego",
     categories: ["business", "productivity"],
