@@ -25,14 +25,35 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      colors: {
-        primary: "var(--primary)",
-        secondary: "var(--secondary)",
-      },
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: "#471f00",
+            },
+            secondary: {
+              DEFAULT: "#934000",
+            },
+          },
+        },
+        dark: {
+          colors: {
+            primary: {
+              DEFAULT: "#fffcf3",
+            },
+            secondary: {
+              DEFAULT: "#efe5c4",
+            },
+          },
+        },
+      },
+    }),
+  ],
 };
 export default config;
 
