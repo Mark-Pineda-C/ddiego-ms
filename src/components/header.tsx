@@ -6,6 +6,14 @@ import { DarkMode, LightMode, PajamasHamburger } from "./svg";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Avatar,
+  User as UserAvatar,
+} from "@nextui-org/react";
 
 export default function Header(user: User) {
   const [mounted, setMounted] = useState(false);
@@ -51,12 +59,34 @@ export default function Header(user: User) {
               </>
             )}
           </div>
-          <Link
+          <Dropdown placement="bottom-end">
+            <DropdownTrigger>
+              <button className="transition-transform">
+                <Avatar name={user.name} isBordered className="lg:hidden" />
+                <UserAvatar
+                  name={user.name}
+                  description={user.role}
+                  className="max-lg:hidden"
+                  avatarProps={{ isBordered: true, showFallback: false }}
+                />
+              </button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="User Actions" variant="flat">
+              <DropdownItem key="profile" className="h-14 gap-2">
+                <p className="font-bold">Inicio de sesion como</p>
+                <p className="font-bold">@{user.username}</p>
+              </DropdownItem>
+              <DropdownItem key="settings">
+                Configuracion de cuenta
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          {/* <Link
             href="#"
             className="text-white grid place-items-center p-2 bg-red-500 rounded-full"
           >
             {getInitials(user.name)}
-          </Link>
+          </Link> */}
         </div>
       </nav>
     </header>
