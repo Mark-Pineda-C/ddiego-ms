@@ -10,7 +10,12 @@ export default {
   out: "./drizzle",
   driver: "pg",
   dbCredentials: {
-    connectionString: process.env.POSTGRES_URL!,
+    // connectionString: process.env.POSTGRES_URL!,
+    database: process.env.POSTGRES_DATABASE!,
+    host: process.env.POSTGRES_HOST!,
+    password: process.env.POSTGRES_PASSWORD!,
+    // port: parseInt(process.env.POSTGRES_PORT!),
+    user: process.env.POSTGRES_USER!,
   },
   strict: false,
 } satisfies Config;

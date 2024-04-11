@@ -14,6 +14,7 @@ import {
   Avatar,
   User as UserAvatar,
 } from "@nextui-org/react";
+import { logout } from "@/lib/actions";
 
 export default function Header(user: User) {
   const [mounted, setMounted] = useState(false);
@@ -61,23 +62,40 @@ export default function Header(user: User) {
           </div>
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
-              <button className="transition-transform">
-                <Avatar name={user.name} isBordered className="lg:hidden" />
+              <button className="transition-transform grid place-items-center focus-visible:outline-0 p-1.5 focus-visible:bg-neutral-500/25 rounded-xl hover:bg-neutral-500/25 duration-200">
+                <Avatar
+                  name={user.name}
+                  isBordered
+                  className="lg:hidden rounded-full"
+                  src={user.image}
+                />
                 <UserAvatar
                   name={user.name}
                   description={user.role}
                   className="max-lg:hidden"
-                  avatarProps={{ isBordered: true, showFallback: false }}
+                  avatarProps={{
+                    src: user.image,
+                    isBordered: true,
+                    showFallback: false,
+                  }}
                 />
               </button>
             </DropdownTrigger>
             <DropdownMenu aria-label="User Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
+              <DropdownItem key="public-profile" className="h-14 gap-2">
                 <p className="font-bold">Inicio de sesion como</p>
                 <p className="font-bold">@{user.username}</p>
               </DropdownItem>
               <DropdownItem key="settings">
                 Configuracion de cuenta
+              </DropdownItem>
+              <DropdownItem
+                key="logout"
+                className="text-danger"
+                onAction={async () => await logout()}
+                color="danger"
+              >
+                Cerrar sesion
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
@@ -92,3 +110,7 @@ export default function Header(user: User) {
     </header>
   );
 }
+
+/**
+
+ */
